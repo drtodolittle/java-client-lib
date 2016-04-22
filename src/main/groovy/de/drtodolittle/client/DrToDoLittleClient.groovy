@@ -25,4 +25,12 @@ public class DrToDoLittleClient {
 		if (response.status == 204) {
 		}
 	}
+
+	public void done(String id) {
+		def response = drtodolittle.get( path : "/api/todos/$id/done",
+			headers: [authorization: "bearer " + token])
+		if (response.status == 204) {
+		}
+	}
+
 }
