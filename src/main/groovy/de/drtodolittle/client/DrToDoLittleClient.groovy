@@ -19,6 +19,29 @@ public class DrToDoLittleClient {
 		}
 	}
 
+	public ToDo createToDo(def topic) {
+		def response = drtodolittle.post( path : '/api/todos',
+			contentType: JSON,
+			requestContentType:  JSON,
+			headers: [authorization: "bearer " + token],
+			body: [topic: topic, done: false])
+		if (response.status == 200) {
+			new ToDo(id: response.data.id, topic: topic, done: false)
+		}
+	
+	}
+
+	public ToDo[] getToDos() {
+		def response = drtodolittle.get( path : '/api/todos',
+			contentType: JSON,
+			requestContentType:  JSON,
+			headers: [authorization: "bearer " + token])
+		if (response.status == 200) {
+			response.data
+		}
+	
+	}
+	
 	public void deleteToDo(String id) {
 		def response = drtodolittle.delete( path : "/api/todos/$id",
 			headers: [authorization: "bearer " + token])
