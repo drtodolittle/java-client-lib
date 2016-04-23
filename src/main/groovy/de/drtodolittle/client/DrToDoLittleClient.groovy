@@ -31,6 +31,17 @@ public class DrToDoLittleClient {
 	
 	}
 
+	public void updateTopic(def id, def topic) {
+		def response = drtodolittle.put( path : "/api/todos/$id",
+			contentType: JSON,
+			requestContentType:  JSON,
+			headers: [authorization: "bearer " + token],
+			body: [topic: topic])
+		if (response.status == 204) {
+		}
+	
+	}
+	
 	public ToDo[] getToDos() {
 		def response = drtodolittle.get( path : '/api/todos',
 			contentType: JSON,

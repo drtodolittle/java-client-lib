@@ -78,8 +78,9 @@ class DrToDoLittleClientTest extends Specification {
 			def todo = client.createToDo("Schönes Topic zum Ändern")
 		
 		when: "update the topic to Schönes Topic geändert"
-			client.updateTopic(todo.id, "Schönes Topic geändert")
-		then: "the todo has the topic "Schönes Topic geändert"
+			client.updateTopic(todo.id, "Schoenes Topic geaendert")
+			
+		then: "the todo has the topic Schoenes Topic geaendert"
 			def todos = client.getToDos()
 			def targetToDo
 			todos.each({
@@ -87,6 +88,6 @@ class DrToDoLittleClientTest extends Specification {
 					targetToDo=it
 				}
 			})
-			targetToDo.topic.equals("Schönes Topic geändert")
+			targetToDo.topic.equals("Schoenes Topic geaendert")
 	}
 }
