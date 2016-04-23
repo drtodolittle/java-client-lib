@@ -71,4 +71,22 @@ class DrToDoLittleClientTest extends Specification {
 			isdone
 	} 
 	
+	def "Update topic"() {
+		given: "A client with an user who is logged on and a todo"
+			def client = new DrToDoLittleClient()
+			client.login("dirk", "dirk1234")
+			def todo = client.createToDo("Schönes Topic zum Ändern")
+		
+		when: "update the topic to Schönes Topic geändert"
+			client.updateTopic(todo.id, "Schönes Topic geändert")
+		then: "the todo has the topic "Schönes Topic geändert"
+			def todos = client.getToDos()
+			def targetToDo
+			todos.each({
+				if (todo.id.equals(it.id)) {
+					targetToDo=it
+				}
+			})
+			targetToDo.topic.equals("Schönes Topic geändert")
+	}
 }
